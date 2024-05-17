@@ -53,10 +53,32 @@ heroes.forEach(hero => {
             <p class="card-text">Poder: ${hero.poder}</p>
             <p class="card-text">Alias: ${hero.alias.join(', ')}</p>
             <p class="card-text">Universo: ${hero.universo}</p>
-            <a href="#" class="btn btn-primary">Ver más</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#heroModal${hero.nombre.replace(/\s+/g, '')}">
+                Ver más
+            </button>
         </div>
     `;
 
     // Agregar la tarjeta al contenedor de superhéroes
     superheroesContainer.appendChild(card);
+
+    // Agregar modal específico para cada superhéroe
+    const modal = `
+    <div class="modal fade" id="heroModal${hero.nombre.replace(/\s+/g, '')}" tabindex="-1" aria-labelledby="heroModalLabel${hero.nombre.replace(/\s+/g, '')}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="heroModalLabel${hero.nombre.replace(/\s+/g, '')}">${hero.nombre}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Poder:</strong> ${hero.poder}</p>
+                    <p><strong>Alias:</strong> ${hero.alias.join(', ')}</p>
+                    <p><strong>Universo:</strong> ${hero.universo}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
 });
